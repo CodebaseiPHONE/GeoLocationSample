@@ -19,11 +19,12 @@
 {
     [super viewDidLoad];
    
-    GeolocationServiceSampleAppDelegate* delegate = [[UIApplication sharedApplication]delegate];
+  
+    [GeolocationServiceUpdater setDesiredMeterDistance:3.0];
     
-    [delegate.geoLocationUpdater getUpdatedLocation:^(CLLocation* location) {
+    [GeolocationServiceUpdater getUpdatedLocation:^(CLLocation* location,CLLocationDistance distance) {
         
-       textViewLog.text = [textViewLog.text stringByAppendingString:[NSString stringWithFormat:@"%@\n\n%@",textViewLog.text,location]];
+       textViewLog.text = [textViewLog.text stringByAppendingString:[NSString stringWithFormat:@"%@\n\n%@ - %f",textViewLog.text,location,distance]];
     }];
 }
 

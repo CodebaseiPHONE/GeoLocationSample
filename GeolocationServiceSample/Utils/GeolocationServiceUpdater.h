@@ -9,15 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-typedef  void (^UpdatedLocation)(CLLocation*);
+typedef  void (^UpdatedLocation)(CLLocation*,CLLocationDistance);
 
 @class CLLocationManager;
 
 @interface GeolocationServiceUpdater : NSObject <CLLocationManagerDelegate>
 @property(strong,nonatomic) CLLocationManager* clLocationManager;
+@property(nonatomic) BOOL isUpdatingLocation;
+@property(nonatomic) float desiredMeterDistance;
 @property(strong,nonatomic) UpdatedLocation locationUpdate;
 +(BOOL)isGeoLocationEnabled;
--(id)init;
--(void)scanForCurrentLocation;
--(void)getUpdatedLocation:(UpdatedLocation)locationUpdater;
++(void)getUpdatedLocation:(UpdatedLocation)locationUpdater;
++(GeolocationServiceUpdater*)getSharedGeoLocationUpdater;
++(void)stopScanningForLocationChange;
++(void)startScaningForLocationChange;
++(CLLocation*)getLastKnowLocation;
++(void)setDesiredMeterDistance:(float)meters;
 @end
