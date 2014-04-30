@@ -63,7 +63,10 @@
     if (distance>=desiredMeterDistance)
     
     {
-        locationUpdate(newLocation,distance);
+        if(locationUpdate)
+        {
+            locationUpdate(newLocation,distance);
+        }
     }
     
     
